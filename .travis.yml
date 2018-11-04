@@ -1,4 +1,7 @@
-sudo: required
+addons:
+  apt:
+    packages:
+      - docker-cesudo: required
 
 services:
         - docker
@@ -10,7 +13,7 @@ before_install:
         - sudo /etc/init.d/mysql stop
         - pwd
         - ls -la
-        - docker-compose up -d
+        - sudo docker-compose up -d
         - docker --version
         - pip install selenium
 script:
