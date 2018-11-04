@@ -1,7 +1,13 @@
+sudo: required
+
+services:
+        - docker
+
 language: python
 python:
         - "3.3"
+before_install:
+        - docker-compose up -d
+        - pip install selenium
 script:
-        - python test.py
-        - python test2.py 18
-        - python testfail.py
+        - python 2test.py
