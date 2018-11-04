@@ -18,4 +18,6 @@ before_install:
         - docker --version
         - pip install selenium
 script:
+        - curl localhost:8080
+        - curl localhost:4444
         - python 2test.py
