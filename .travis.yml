@@ -1,7 +1,8 @@
+sudo: required
 addons:
   apt:
     packages:
-      - docker-cesudo: required
+      - docker-ce
 
 services:
         - docker
