@@ -19,5 +19,6 @@ before_install:
         - pip install selenium
 script:
         - curl localhost:8080
+        - sleep 15
         - curl localhost:4444
         - python 2test.py
