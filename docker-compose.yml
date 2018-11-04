@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+  webserver:
+    image: php:7.2.1-apache
+    container_name: 'apache2'
+    restart: 'always'
+    ports:
+      - "8080:80"
+      - "443:443"
+    links: 
+      - mysql
+    volumes:
+      - ./files:/var/www/html
+      - ./config:/usr/local/etc/php
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html
+  
+  mysql:
+    image: mysql
+    container_name: 'mysql'
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8081:80'
+
+  chrome-selenium:
+    image: selenium/node-chrome:3.14.0-gallium
+    volumes:
+      - ./shm:/dev/smh
+    depends_on:
+      - hub
+    links:
+      - webserver
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub:3.14.0-gallium
+    links:
+      - webserver
+    ports:
+      - "4444:4444"
+    environment:
+            - GRID_TIMEOUT=10000
+            - GRID_BROWSER_TIMEOUT=10000
+            - SE_OPTS=-browserTimeout 10 -timeout 10
