@@ -11,6 +11,7 @@ before_install:
         - pwd
         - ls -la
         - docker-compose up -d
+        - docker --version
         - pip install selenium
 script:
         - python 2test.py
