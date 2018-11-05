@@ -17,14 +17,12 @@ before_install:
         - sudo docker-compose up -d
         - docker --version
         - pip install selenium
-jobs:
-        include:
-        - stage : "Tests"
-          name: "Setup environment"
-          script :
-                - curl localhost:8080
+
+script :
+                - echo "Waiting a bit before pinging the containers..."
                 - sleep 15
+                - curl localhost:8080
                 - curl localhost:4444
-        - name : "Unit tests on index.html"
-          script :
+                - curl localhost:8081
+                - echo "Starting tests..."
                 - python 2test.py
