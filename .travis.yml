@@ -23,8 +23,8 @@ jobs:
           name: "Setup environment"
           script :
                 - curl localhost:8080
-                - sleep 8
+                - sleep 15
                 - curl localhost:4444
-          name : "Unit tests on index.html"
+        - name : "Unit tests on index.html"
           script :
                 - python 2test.py
