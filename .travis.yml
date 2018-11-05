@@ -19,11 +19,12 @@ before_install:
         - pip install selenium
 jobs:
         include:
-        - stage : Setup environment
+        - stage : "Tests"
+          name: "Setup environment"
           script :
                 - curl localhost:8080
                 - sleep 8
                 - curl localhost:4444
-        - stage : Test bash 1
+          name : "Unit tests on index.html"
           script :
                 - python 2test.py
