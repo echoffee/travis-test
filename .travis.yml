@@ -1,5 +1,9 @@
 sudo: required
 addons:
+  sonarcloud:
+      organization: "echoffee-github"
+      token:
+
   apt:
     packages:
       - docker-ce
@@ -7,6 +11,7 @@ addons:
 services:
         - docker
 
+dist: trusty
 language: python
 python:
         - "3.3"
@@ -18,7 +23,10 @@ before_install:
         - docker --version
         - pip install selenium
 
-script :
+jobs:
+    include:
+        - stage: tests
+          script :
                 - echo "Waiting a bit before pinging the containers..."
                 - sleep 15
                 - curl localhost:8080
@@ -27,3 +35,6 @@ script :
                 - echo "Starting tests..."
                 - python 2test.py
                 - if [ $(grep -nr '<<<<<<' . | wc -l) -gt -1 ]; then exit 1; fi
+        - stage: sonar
+          script :
+                - sonar-scanner
