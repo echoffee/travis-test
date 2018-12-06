@@ -31,7 +31,7 @@ deploy:
   api_key:
     secure: waS8hP4LT1R0R+dMiCBEov2CUQgH04ZrzRz0Zq5xuaeKNSsK9/HiLZtYawZ06cidPO97cZcmTqO3FZ9ha5CkdFsCiUAN95FN4lu4/sN2JkJM3X1Ov1gqdKVzZ7aXX01CNQiQf/SbU8bi+NCYerFT+7DucpWHIVhSnEDq3ejVahUgV4OS0Nv7M5fbRdtw321PXEYZ1SgRAMf6PJ8mVhIjWI/fJpA1Tl73yPmP2Z93deKdPuODf+wvTyrOvVsFHE1pTq9K5J2rHKaDkejLBMwwuXqbZnVKAllQHbiakSITWftf4T3eNetwL4Dyk3ZRNmxwvdbjke1xdqL/XesR5lODu55Z9bG//e7Pjb/DF4JvvSwYYS+2HYOebr6Mo2lTrkJSEkGlCbIn2cgOfuBoUrIIEhm3iF7hE21mg5d7d1XRWAOXFHs1NM8UkATRxTMXdiuSspz25tzjUmfoCANCxYIIBjlRciT3kVh05VKEwO/HvFmrwcIsDmUumYubhoizUjekTD6LRYC/cTnQAcYvd82swBn2moFbr9Ya82qzAOqlqSCxHiEAL1FPUFq7dwMqPUHkipu8O9DiYgo+7CWcPZGOddbZ9XziYjDxdcfZFp+nd03ywMfQpQrDCakj1dg8drAQPogFy4uIc6cLZ28Pjvc8u9n6hgAVr50II4QnkiL1o0A=
   file: src.tar
-  slip_cleanup: true
+  skip_cleanup: true
   on:
     repo: echoffee/travis-test
     tags: true
