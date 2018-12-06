@@ -2,28 +2,38 @@ sudo: required
 addons:
   apt:
     packages:
-      - docker-ce
-
+    - docker-ce
 services:
-        - docker
-
+- docker
 language: python
 python:
-        - "3.3"
+- '3.3'
 before_install:
-        - sudo /etc/init.d/mysql stop
-        - pwd
-        - ls -la
-        - sudo docker-compose up -d
-        - docker --version
-        - pip install selenium
+- sudo /etc/init.d/mysql stop
+- pwd
+- ls -la
+- sudo docker-compose up -d
+- docker --version
+- pip install selenium
+script:
+- echo "Waiting a bit before pinging the containers..."
+- sleep 15
+- curl localhost:8080
+- curl localhost:4444
+- curl localhost:8081
+- echo "Starting tests..."
+- python 2test.py
+- if [ $(grep -nr '<<<<<<' . | wc -l) -gt 1 ]; then exit 1; fi
 
-script :
-                - echo "Waiting a bit before pinging the containers..."
-                - sleep 15
-                - curl localhost:8080
-                - curl localhost:4444
-                - curl localhost:8081
-                - echo "Starting tests..."
-                - python 2test.py
-                - if [ $(grep -nr '<<<<<<' . | wc -l) -gt 1 ]; then exit 1; fi
+before_deploy:
+- tar -cvf src.tar files/*
+
+deploy:
+  provider: releases
+  api_key:
+    secure: kAHD1B06cOtOwDWeJZgY7pEXvuJc5mOuT0nt9Rq1Z7hvAaVn+Pwl7zBsg/3PlSQoghan3/vTGbbM4F8jk0iilez7fSKpVojTfcMj/leL1rJsxn46pT3iOgDe/ZfF1tFD9TPZvbxqUGS2mQvAtfoZ/ilWCaSRHM3b+bDB9eclMDnh9f1g+MZhyimsJSXNXWXTMuEkinMOGVPLY818siB65x9KtMlRgBOoUaM0BYlTmx3OQtKC+7XILgRRq/IHNJ47Qes64e2rl0tTjdROzZwdgM1Pq2WMyKLgoKqY6ibqyd/ScIw7wjucPF6JIlvVG8bAGcp+4FEj/ySQY3LcBXan7UAMjAdm7foevNR7aQFvAVDn/Bf7+6SB/oLUahHO4CpIikTjX4iAUelmPdlTSUov4PFoQUmwr7vnVO11NBk5TvJX6VKiO3YAl8JgVUCVYCnIbxXkGTGB51VefxVxmaTDq+ErVea2yaBlsOzC3tcqN8dUYTkpfOLaNW7v8IuP1JHBVf2LhriY0lizpqFTEDAUiQpN4JZ/vAGsPIE63iyQZRfs6YEqsf+gBnhCwDWfE57DuvtbLnFX1QdWwEGxZu/2eowWDEqz6j5XhNYTq7UQlu3buPmoLmO2tqv+OcUXXG/iDlA6RA5wLZznr/4I+t4wZqTKDzMhilZBESBHT32wmUo=
+  file: src.tar
+  skip_cleanup: true
+  draft: true
+  on:
+      tags: true
