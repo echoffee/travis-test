@@ -26,4 +26,4 @@ script :
                 - curl localhost:8081
                 - echo "Starting tests..."
                 - python 2test.py
-                - if [ $(grep -nr '<<<<<<' . | wc -l) -gt -1 ]; then exit 1; fi
+                - if [ $(grep -nr '<<<<<<' . | wc -l) -gt 0 ]; then exit 1; fi
