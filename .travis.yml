@@ -24,16 +24,13 @@ script:
 - echo "Starting tests..."
 - python 2test.py
 - if [ $(grep -nr '<<<<<<' . | wc -l) -gt 1 ]; then exit 1; fi
-
 before_deploy:
 - tar -cvf src.tar files/*
-
 deploy:
   provider: releases
   api_key:
-    secure: kAHD1B06cOtOwDWeJZgY7pEXvuJc5mOuT0nt9Rq1Z7hvAaVn+Pwl7zBsg/3PlSQoghan3/vTGbbM4F8jk0iilez7fSKpVojTfcMj/leL1rJsxn46pT3iOgDe/ZfF1tFD9TPZvbxqUGS2mQvAtfoZ/ilWCaSRHM3b+bDB9eclMDnh9f1g+MZhyimsJSXNXWXTMuEkinMOGVPLY818siB65x9KtMlRgBOoUaM0BYlTmx3OQtKC+7XILgRRq/IHNJ47Qes64e2rl0tTjdROzZwdgM1Pq2WMyKLgoKqY6ibqyd/ScIw7wjucPF6JIlvVG8bAGcp+4FEj/ySQY3LcBXan7UAMjAdm7foevNR7aQFvAVDn/Bf7+6SB/oLUahHO4CpIikTjX4iAUelmPdlTSUov4PFoQUmwr7vnVO11NBk5TvJX6VKiO3YAl8JgVUCVYCnIbxXkGTGB51VefxVxmaTDq+ErVea2yaBlsOzC3tcqN8dUYTkpfOLaNW7v8IuP1JHBVf2LhriY0lizpqFTEDAUiQpN4JZ/vAGsPIE63iyQZRfs6YEqsf+gBnhCwDWfE57DuvtbLnFX1QdWwEGxZu/2eowWDEqz6j5XhNYTq7UQlu3buPmoLmO2tqv+OcUXXG/iDlA6RA5wLZznr/4I+t4wZqTKDzMhilZBESBHT32wmUo=
+    secure: waS8hP4LT1R0R+dMiCBEov2CUQgH04ZrzRz0Zq5xuaeKNSsK9/HiLZtYawZ06cidPO97cZcmTqO3FZ9ha5CkdFsCiUAN95FN4lu4/sN2JkJM3X1Ov1gqdKVzZ7aXX01CNQiQf/SbU8bi+NCYerFT+7DucpWHIVhSnEDq3ejVahUgV4OS0Nv7M5fbRdtw321PXEYZ1SgRAMf6PJ8mVhIjWI/fJpA1Tl73yPmP2Z93deKdPuODf+wvTyrOvVsFHE1pTq9K5J2rHKaDkejLBMwwuXqbZnVKAllQHbiakSITWftf4T3eNetwL4Dyk3ZRNmxwvdbjke1xdqL/XesR5lODu55Z9bG//e7Pjb/DF4JvvSwYYS+2HYOebr6Mo2lTrkJSEkGlCbIn2cgOfuBoUrIIEhm3iF7hE21mg5d7d1XRWAOXFHs1NM8UkATRxTMXdiuSspz25tzjUmfoCANCxYIIBjlRciT3kVh05VKEwO/HvFmrwcIsDmUumYubhoizUjekTD6LRYC/cTnQAcYvd82swBn2moFbr9Ya82qzAOqlqSCxHiEAL1FPUFq7dwMqPUHkipu8O9DiYgo+7CWcPZGOddbZ9XziYjDxdcfZFp+nd03ywMfQpQrDCakj1dg8drAQPogFy4uIc6cLZ28Pjvc8u9n6hgAVr50II4QnkiL1o0A=
   file: src.tar
-  skip_cleanup: true
-  draft: true
   on:
-      tags: true
+    repo: echoffee/travis-test
+    tags: true
